@@ -7,6 +7,7 @@ export default function Dashboard() {
     <div className="w-full py-5 flex flex-col justify-center items-center">
       <h1 className="text-4xl">Welcome to the application</h1>
       <svg
+        role="img"
         xmlns="http://www.w3.org/2000/svg"
         id="Layer_1"
         data-name="Layer 1"

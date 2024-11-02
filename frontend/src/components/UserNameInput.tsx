@@ -7,8 +7,7 @@ import { UserContext } from "./AppContainer";
 export default function UserNameInput() {
   const [email, setEmail] = useState("");
   const { errorMessages, SetTouched } = useFormValidation(email, "email");
-  const { user, setUserProperty, clearUserProperty }: any =
-    useContext(UserContext);
+  const { setUserProperty, clearUserProperty }: any = useContext(UserContext);
 
   useEffect(() => {
     if (!errorMessages.length) {
@@ -16,14 +15,14 @@ export default function UserNameInput() {
     } else {
       clearUserProperty("email");
     }
-  }, [errorMessages]);
+  }, [errorMessages, email]);
 
   return (
     <div className="w-full m-1">
-      <label htmlFor="userName"></label>
+      <label htmlFor="email"></label>
       <input
         type="email"
-        id="userName"
+        id="email"
         className={`p-2 py-4 border-solid border-2 rounded-md w-full outline-none text-lg ${
           styles.user_name_input
         } ${errorMessages.length ? "border-red-300" : ""}`}

@@ -6,7 +6,7 @@ import Dashboard from "../pages/Dashboard";
 // this is the Middle section
 export default function MiddleContainer() {
   return (
-    <div className="w-full p-5 flex justify-center">
+    <div data-testid="wrapper" className="w-full p-5 flex justify-center">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginContainer />} />

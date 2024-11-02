@@ -24,7 +24,10 @@ export default function SignupContainer() {
 
   return (
     <div className="w-full">
-      <span className="text-2xl text-orange-500 font-semibold m-1 mb-">
+      <span
+        role="heading"
+        className="text-2xl text-orange-500 font-semibold m-1 mb-"
+      >
         Sign up
       </span>
       <NameInput />

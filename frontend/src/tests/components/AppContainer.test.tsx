@@ -1,17 +1,17 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import AppContainer, { UserContext } from "../components/AppContainer";
-import { useUser } from "../features";
+import AppContainer, { UserContext } from "../../components/AppContainer";
+import { useUser } from "../../features";
 
 // Mock the components
-jest.mock("../components/Header", () => () => <div>Mock Header</div>);
-jest.mock("../components/MiddleContainer", () => () => (
+jest.mock("../../components/Header", () => () => <div>Mock Header</div>);
+jest.mock("../../components/MiddleContainer", () => () => (
   <div>Mock MiddleContainer</div>
 ));
-jest.mock("../components/Footer", () => () => <div>Mock Footer</div>);
+jest.mock("../../components/Footer", () => () => <div>Mock Footer</div>);
 
 // Mock the useUser hook
-jest.mock("../features", () => ({
+jest.mock("../../features", () => ({
   useUser: jest.fn(),
 }));
 

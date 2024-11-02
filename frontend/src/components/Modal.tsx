@@ -18,9 +18,10 @@ export default function Modal({ open, onClose, children }: ModalProps) {
     >
       {/* Modal */}
       <div
+        role="dialog"
         onClick={(e) => e.stopPropagation()}
         className={`mx-auto sm:w-9/12 md:w-6/12 bg-white rounded-md p-10 relative transition-all duration-500 ${
-          open ? "scale-100 opacity-100" : "scale-125 opacity-0"
+          open ? "scale-100 opacity-100 block" : "scale-125 opacity-0 hidden"
         }`}
       >
         <img
@@ -29,7 +30,7 @@ export default function Modal({ open, onClose, children }: ModalProps) {
           alt="Close"
           className="cursor-pointer h-auto w-5 absolute top-4 right-4"
         />
-        {children}
+        {open && children}
       </div>
     </div>
   );

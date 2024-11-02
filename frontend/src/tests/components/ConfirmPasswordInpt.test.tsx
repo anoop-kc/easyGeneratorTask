@@ -1,12 +1,12 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import ConfirmPasswordInput from "../components/ConfirmPasswordInput";
-import { UserContext } from "../components/AppContainer";
-import { useFormValidation } from "../features";
-import { iErrorObject } from "../interfaces";
+import ConfirmPasswordInput from "../../components/ConfirmPasswordInput";
+import { UserContext } from "../../components/AppContainer";
+import { useFormValidation } from "../../features";
+import { iErrorObject } from "../../interfaces";
 
 // Mock the `useFormValidation` hook
-jest.mock("../features", () => ({
+jest.mock("../../features", () => ({
   useFormValidation: jest.fn(),
 }));
 
@@ -51,6 +51,21 @@ describe("PasswordInput Component", () => {
   it("renders password input field", () => {
     const input = screen.getByPlaceholderText("Confirm Password");
     expect(input).toBeInTheDocument();
+  });
+
+  it("has an initial empty state for confirm password", () => {
+    const input = screen.getByPlaceholderText(
+      "Confirm Password"
+    ) as HTMLInputElement;
+    expect(input.value).toBe("");
+  });
+
+  it("updates confirm password state on input change", () => {
+    const input = screen.getByPlaceholderText(
+      "Confirm Password"
+    ) as HTMLInputElement;
+    fireEvent.change(input, { target: { value: "TestPassword" } });
+    expect(input.value).toBe("TestPassword");
   });
 
   it("calls SetTouched and updates confirmPassword on input change", () => {

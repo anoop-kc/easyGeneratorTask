@@ -26,7 +26,7 @@ export default function PasswordInput({
     } else {
       clearUserProperty("password");
     }
-  }, [errorMessages]);
+  }, [errorMessages, password]);
 
   return (
     <div className="w-full m-1">

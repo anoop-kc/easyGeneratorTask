@@ -15,7 +15,7 @@ export default function NameInput() {
     } else {
       clearUserProperty("name");
     }
-  }, [errorMessages]);
+  }, [errorMessages, name]);
 
   return (
     <div className="w-full m-1">
