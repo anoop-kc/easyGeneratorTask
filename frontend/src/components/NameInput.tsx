@@ -1,22 +1,36 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "../assets/styles/NameInput.module.css";
-import useFormValidation from "../features/form-validation/hooks/use-form-validation";
+import { useFormValidation } from "../features";
+import ErrorMessages from "./ErrorMessages";
+import { UserContext } from "./AppContainer";
 
 export default function NameInput() {
   const [name, setName] = useState("");
-  const { errorObj } = useFormValidation(name, "name");
+  const { errorMessages, SetTouched } = useFormValidation(name, "name");
+  const { setUserProperty, clearUserProperty }: any = useContext(UserContext);
+
+  useEffect(() => {
+    if (!errorMessages.length) {
+      setUserProperty("name", name);
+    } else {
+      clearUserProperty("name");
+    }
+  }, [errorMessages]);
 
   return (
     <div className="w-full m-1">
       <label htmlFor="name"></label>
       <input
         type="text"
-        className={`p-2 py-4 border-solid border-2 rounded-md w-full outline-none text-lg ${styles.name_input}`}
+        className={`p-2 py-4 border-solid border-2 rounded-md w-full outline-none text-lg ${
+          styles.name_input
+        } ${errorMessages.length ? "border-red-300" : ""}`}
         placeholder="Full name"
         id="name"
         onChange={(e) => setName(e.target.value)}
+        onFocus={() => SetTouched(true)}
       />
-      {errorObj.errorMessage}
+      {errorMessages && <ErrorMessages errors={errorMessages} />}
     </div>
   );
 }

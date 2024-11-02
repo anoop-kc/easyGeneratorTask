@@ -10,7 +10,7 @@ export default function LoginContainer() {
   return (
     <div className="sm:w-8/12 md:w-4/12 m-5 p-5">
       <UserNameInput />
-      <PasswordInput />
+      <PasswordInput hideValidationMessages={true} />
       <LoginButton />
       <span
         onClick={() => {

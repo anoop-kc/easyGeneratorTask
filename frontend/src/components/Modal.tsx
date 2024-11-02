@@ -1,4 +1,4 @@
-import React, { Children, MouseEventHandler, ReactElement } from "react";
+import React, { MouseEventHandler, ReactElement } from "react";
 import closeIcon from "../assets/images/close.svg";
 
 interface ModalProps {
@@ -27,7 +27,7 @@ export default function Modal({ open, onClose, children }: ModalProps) {
           src={closeIcon}
           onClick={onClose}
           alt="Close"
-          className="cursor-pointer h-auto w-5 absolute top-3 right-3"
+          className="cursor-pointer h-auto w-5 absolute top-4 right-4"
         />
         {children}
       </div>
