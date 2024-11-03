@@ -4,6 +4,20 @@ This is a task given from EasyGenerator as part of the interview process
 
 The project contains both the frontend and backend codebase. Front end is created in react with typescript and tailwind css. The back end is created in Nestjs
 
+## Clone the repository
+
+in the terminal, type
+
+```bash
+git clone https://github.com/anoop-kc/easyGeneratorTask.git
+```
+
+go to the root folder of the project
+
+```bash
+cd easyGeneratorTask
+```
+
 ## Running the app
 
 if you are using docker, you can run the whole project in a single command using
@@ -45,6 +59,12 @@ or you can alternatively type ctrl + c from the terminal where the docker contai
 
 ## Front end
 
+In the project root folder, run
+
+```bash
+npm install
+```
+
 in terminal from the project root folder, type
 
 ```bash
@@ -79,6 +99,12 @@ Your app is ready to be deployed!
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ## Back end
+
+In the project root folder, run
+
+```bash
+npm install
+```
 
 ## Available Scripts
 

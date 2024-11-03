@@ -1,5 +1,13 @@
 This project was created with Nest.js.
 
+## Installation
+
+In the project root folder, run
+
+```bash
+npm install
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
