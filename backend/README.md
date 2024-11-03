@@ -9,4 +9,4 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3001](http://localhost:3001) to view it in the browser.
 
-The app will reload if you make edits.\
+The app will reload if you make edits.
