@@ -18,6 +18,7 @@ export default function AppContainer() {
     isUserValid,
     login,
     logout,
+    signup,
   } = useUser();
   return (
     <UserContext.Provider
@@ -30,6 +31,7 @@ export default function AppContainer() {
         isUserValid,
         login,
         logout,
+        signup,
       }}
     >
       <div className="w-full h-screen flex items-start flex-col">

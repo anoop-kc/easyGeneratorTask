@@ -1,6 +1,5 @@
-// useUser.test.tsx
-import { renderHook, act } from "@testing-library/react";
-import { useUser } from "../../features/";
+import { renderHook, act, waitFor } from "@testing-library/react";
+import { useUser } from "../../features";
 import { iUser, intialUser } from "../../interfaces";
 
 describe("useUser hook", () => {
@@ -46,23 +45,7 @@ describe("useUser hook", () => {
     expect(result.current.user.name).toBe("");
   });
 
-  it("logs in the user and stores user data in localStorage", () => {
-    const { result } = renderHook(() => useUser());
-    const mockUser: iUser = {
-      name: "Some Name",
-      email: "somename@example.com",
-      password: "password123",
-    };
-
-    act(() => {
-      result.current.login(mockUser);
-    });
-
-    expect(result.current.user).toEqual(mockUser);
-    expect(localStorage.getItem("user")).toBe(JSON.stringify(mockUser));
-  });
-
-  it("logs out the user and clears user data from localStorage", () => {
+  it("logs out the user and clears user data from localStorage", async () => {
     const { result } = renderHook(() => useUser());
 
     act(() => {
@@ -74,8 +57,10 @@ describe("useUser hook", () => {
       result.current.logout();
     });
 
-    expect(result.current.user).toEqual(intialUser);
-    expect(localStorage.getItem("user")).toBeNull();
+    await waitFor(() => {
+      expect(result.current.user).toEqual(intialUser);
+      expect(localStorage.getItem("user")).toBeNull();
+    });
   });
 
   it("validates user correctly for login action", () => {

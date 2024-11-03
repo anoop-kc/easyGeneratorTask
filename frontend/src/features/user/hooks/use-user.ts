@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { iUser, intialUser } from "../../../interfaces";
+import { createUser, loginUser } from "../../../services/user.service";
 
 const useUser = () => {
   const [user, setUser] = useState<iUser>(
@@ -25,15 +26,46 @@ const useUser = () => {
     setUser(newUser);
   };
 
-  const login = (userData: iUser) => {
+  const signup = async (userData: iUser) => {
     setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData));
-    return true;
+    const createUserResponse = await createUser(userData);
+    if (createUserResponse.statusCode == 201) {
+      localStorage.setItem(
+        "user",
+        JSON.stringify(createUserResponse.userObj.user)
+      );
+      localStorage.setItem(
+        "token",
+        JSON.stringify(createUserResponse.userObj.token)
+      );
+    }
+
+    return createUserResponse;
+  };
+
+  const login = async (userData: iUser) => {
+    const loginUserResponse = await loginUser(
+      userData.email,
+      userData.password
+    );
+    if (loginUserResponse.statusCode == 302) {
+      setUser(loginUserResponse.userObj.user);
+      localStorage.setItem(
+        "user",
+        JSON.stringify(loginUserResponse.userObj.user)
+      );
+      localStorage.setItem(
+        "token",
+        JSON.stringify(loginUserResponse.userObj.token)
+      );
+    }
+    return loginUserResponse;
   };
 
   const logout = () => {
     setUser(intialUser);
     localStorage.removeItem("user");
+    localStorage.removeItem("token");
   };
 
   const isUserValid = (user: iUser, action: string): boolean => {
@@ -59,6 +91,7 @@ const useUser = () => {
     isUserValid,
     login,
     logout,
+    signup,
   };
 };
 

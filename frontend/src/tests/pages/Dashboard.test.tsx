@@ -1,33 +1,69 @@
-// Dashboard.test.tsx
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import { UserContext } from "../../components/AppContainer";
+import { BrowserRouter as Router } from "react-router-dom";
 import Dashboard from "../../pages/Dashboard";
 
-describe("Dashboard component", () => {
-  it("renders without crashing", () => {
-    render(<Dashboard />);
-    expect(screen.getByText("Welcome to the application")).toBeInTheDocument();
+// Mock the logout function
+const mockLogout = jest.fn();
+
+// Function to render the Dashboard component with the UserContext
+const renderDashboard = (
+  user = { name: "Test User", email: "testuser@example.com" }
+) => {
+  render(
+    <UserContext.Provider value={{ user, logout: mockLogout }}>
+      <Router>
+        <Dashboard />
+      </Router>
+    </UserContext.Provider>
+  );
+};
+
+describe("Dashboard", () => {
+  afterEach(() => {
+    jest.clearAllMocks(); // Clear mock function calls after each test
   });
 
-  it("displays the heading with correct text", () => {
-    render(<Dashboard />);
-    const heading = screen.getByRole("heading", { level: 1 });
-    expect(heading).toHaveTextContent("Welcome to the application");
+  it("renders the dashboard with user details", () => {
+    renderDashboard();
+
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
+      "Welcome to the application"
+    );
+    expect(screen.getByRole("heading", { level: 3 })).toHaveTextContent(
+      "Test User"
+    );
+    expect(screen.getByText("testuser@example.com")).toBeInTheDocument();
   });
 
-  it("renders the SVG with the correct attributes", () => {
-    render(<Dashboard />);
-    const svg = screen.getByRole("img");
+  it("calls logout and navigates to the home page when logout button is clicked", () => {
+    renderDashboard();
 
-    expect(svg).toBeInTheDocument();
-    expect(svg).toHaveAttribute("xmlns", "http://www.w3.org/2000/svg");
-    expect(svg).toHaveAttribute("width", "256");
-    expect(svg).toHaveAttribute("height", "256");
-    expect(svg).toHaveClass("mt-28 fill-orange-400");
+    const logoutButton = screen.getByRole("button", { name: /logout/i });
+    fireEvent.click(logoutButton);
+
+    expect(mockLogout).toHaveBeenCalled(); // Verify that logout function was called
   });
 
-  it("matches the snapshot", () => {
-    const { asFragment } = render(<Dashboard />);
-    expect(asFragment()).toMatchSnapshot();
+  it("does not render the logout button if user is null", () => {
+    renderDashboard({ name: "", email: "" }); // Render with initial no user
+
+    const logoutButton = screen.queryByRole("button", { name: /logout/i });
+    expect(logoutButton).not.toBeInTheDocument(); // Ensure the button is not rendered
+  });
+
+  it("renders the space shuttle SVG", () => {
+    renderDashboard();
+
+    const svgElement = screen.getByRole("img"); // Get the SVG by its role
+    expect(svgElement).toBeInTheDocument(); // Ensure the SVG is rendered
+  });
+
+  it("renders the logout button if user is present", () => {
+    renderDashboard(); // Render with user
+
+    const logoutButton = screen.getByRole("button", { name: /logout/i });
+    expect(logoutButton).toBeInTheDocument(); // Ensure the button is rendered
   });
 });

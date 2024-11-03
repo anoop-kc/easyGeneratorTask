@@ -5,11 +5,15 @@ import NameInput from "./NameInput";
 import ConfirmPasswordInput from "./ConfirmPasswordInput";
 import { UserContext } from "./AppContainer";
 import { useNavigate } from "react-router-dom";
+import Alert from "./Alert";
+import useAlert from "../features/alert/hooks/use-alert";
 
 export default function SignupContainer() {
   const [userValid, setUserValid] = useState(false);
-  const { user, isUserValid, passwordConfirmed }: any = useContext(UserContext);
+  const { user, isUserValid, passwordConfirmed, signup }: any =
+    useContext(UserContext);
   const navigate = useNavigate();
+  const { alert, showAlert, closeAlert } = useAlert();
 
   useEffect(() => {
     function checkUserValid() {
@@ -18,8 +22,13 @@ export default function SignupContainer() {
     checkUserValid();
   }, [user]);
 
-  const handleSignup = () => {
-    navigate("/dashboard");
+  const handleSignup = async () => {
+    const singupResponse = await signup(user);
+    if (singupResponse.statusCode == 201) {
+      navigate("/dashboard");
+    } else {
+      showAlert(singupResponse.message, "error");
+    }
   };
 
   return (
@@ -42,6 +51,7 @@ export default function SignupContainer() {
       >
         Sign up
       </button>
+      <Alert alert={alert} onClose={closeAlert} />
     </div>
   );
 }

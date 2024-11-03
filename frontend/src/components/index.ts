@@ -1,3 +1,4 @@
+import Alert from "./Alert";
 import AppContainer from "./AppContainer";
 import ConfirmPasswordInput from "./ConfirmPasswordInput";
 import ErrorMessages from "./ErrorMessages";
@@ -28,4 +29,5 @@ export {
   PasswordInput,
   SignupContainer,
   UserNameInput,
+  Alert,
 };
