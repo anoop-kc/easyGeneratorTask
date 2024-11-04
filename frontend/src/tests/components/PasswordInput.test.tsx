@@ -1,4 +1,3 @@
-// PasswordInput.test.tsx
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -42,7 +41,7 @@ describe("PasswordInput Component", () => {
     );
   };
 
-  test("renders password input with placeholder", () => {
+  it("renders password input with placeholder", () => {
     renderComponent();
     const input = screen.getByPlaceholderText(/password/i);
     expect(input).toBeInTheDocument();
@@ -61,7 +60,7 @@ describe("PasswordInput Component", () => {
     expect(input.value).toBe("TestPassword");
   });
 
-  test("calls setUserProperty when there are no validation errors", async () => {
+  it("calls setUserProperty when there are no validation errors", async () => {
     renderComponent([]);
 
     const input = screen.getByPlaceholderText(/password/i);
@@ -73,7 +72,7 @@ describe("PasswordInput Component", () => {
     expect(clearUserProperty).not.toHaveBeenCalled();
   });
 
-  test("calls clearUserProperty when there are validation errors", async () => {
+  it("calls clearUserProperty when there are validation errors", async () => {
     renderComponent([
       { isValid: false, errorMessage: "Password is too short" },
     ]);
@@ -87,7 +86,7 @@ describe("PasswordInput Component", () => {
     expect(setUserProperty).not.toHaveBeenCalled();
   });
 
-  test("calls SetTouched when the input is focused", () => {
+  it("calls SetTouched when the input is focused", () => {
     const mockSetTouched = jest.fn();
     (useFormValidation as jest.Mock).mockReturnValue({
       errorMessages: [],
@@ -111,7 +110,7 @@ describe("PasswordInput Component", () => {
     expect(mockSetTouched).toHaveBeenCalledWith(true);
   });
 
-  test("does not render error messages if hideValidationMessages is true", () => {
+  it("does not render error messages if hideValidationMessages is true", () => {
     const errorMessages = [
       { isValid: false, errorMessage: "Password is too short" },
     ];
@@ -122,7 +121,7 @@ describe("PasswordInput Component", () => {
     });
   });
 
-  test("renders error messages when there are validation errors and hideValidationMessages is false", () => {
+  it("renders error messages when there are validation errors and hideValidationMessages is false", () => {
     const errorMessages: iErrorObject[] = [
       { isValid: false, errorMessage: "Password is too short" },
     ];

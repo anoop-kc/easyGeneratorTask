@@ -1,4 +1,3 @@
-// LoginContainer.test.tsx
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { LoginContainer, Modal } from "../../components";

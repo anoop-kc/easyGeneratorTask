@@ -1,4 +1,3 @@
-// useAlert.test.ts
 import { renderHook, act } from "@testing-library/react";
 import { useAlert } from "../../features";
 import { iAlert } from "../../interfaces";

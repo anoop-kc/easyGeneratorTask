@@ -14,7 +14,7 @@ async function bootstrap() {
 
   // Enable CORS with specific options
   app.enableCors({
-    origin: '*', // Change this to the front-end URL
+    origin: '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   });
@@ -27,7 +27,7 @@ async function bootstrap() {
     .setTitle('User API')
     .setDescription('API for user authentication and onboarding')
     .setVersion('1.0')
-    .addBearerAuth() // Adds bearer token authentication to Swagger
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('apidocs', app, document, {

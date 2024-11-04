@@ -35,7 +35,7 @@ describe("MockedLoginButton", () => {
     jest.clearAllMocks();
   });
 
-  test("renders the Login button", () => {
+  it("renders the Login button", () => {
     render(<LoginButtonMock />);
     const loginButton = screen.getByRole("button", { name: /login/i });
     expect(loginButton).toBeInTheDocument();

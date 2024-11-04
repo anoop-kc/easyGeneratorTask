@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import Footer from "../../components/Footer"; // Adjust the import based on your file structure
+import Footer from "../../components/Footer";
 
 describe("Footer Component", () => {
   test("renders correctly", () => {
@@ -11,7 +11,7 @@ describe("Footer Component", () => {
     expect(footerElement).toBeInTheDocument();
   });
 
-  test("displays the current year", () => {
+  it("displays the current year", () => {
     const { getByText } = render(<Footer />);
 
     // Get the current year
@@ -24,7 +24,7 @@ describe("Footer Component", () => {
     expect(yearElement).toBeInTheDocument();
   });
 
-  test("has correct classes applied", () => {
+  it("has correct classes applied", () => {
     const { container } = render(<Footer />);
 
     // Check if the footer has the correct class applied

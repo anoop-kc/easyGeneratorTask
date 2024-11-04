@@ -30,7 +30,7 @@ describe("MockedSignupContainer", () => {
     });
   });
 
-  test("renders the signup button and heading", () => {
+  it("renders the signup button and heading", () => {
     render(
       <MockedSignupContainer mockSignup={mockSignup} passwordConfirmed={true} />
     );
@@ -43,7 +43,7 @@ describe("MockedSignupContainer", () => {
     ).toBeInTheDocument();
   });
 
-  test("calls signup and logs navigation message on success", async () => {
+  it("calls signup and logs navigation message on success", async () => {
     mockSignup.mockResolvedValueOnce({ statusCode: 201 });
     const consoleLogSpy = jest.spyOn(console, "log").mockImplementation();
 
@@ -60,7 +60,7 @@ describe("MockedSignupContainer", () => {
     consoleLogSpy.mockRestore();
   });
 
-  test("shows alert on unsuccessful signup", async () => {
+  it("shows alert on unsuccessful signup", async () => {
     const errorMessage = "User already exists";
     mockSignup.mockResolvedValueOnce({
       statusCode: 400,
@@ -79,7 +79,7 @@ describe("MockedSignupContainer", () => {
     });
   });
 
-  test("enables button when userValid and passwordConfirmed are true", () => {
+  it("enables button when userValid and passwordConfirmed are true", () => {
     render(
       <MockedSignupContainer mockSignup={mockSignup} passwordConfirmed={true} />
     );
@@ -89,7 +89,7 @@ describe("MockedSignupContainer", () => {
     expect(button).toBeEnabled();
   });
 
-  test("disables button when userValid or passwordConfirmed is false", () => {
+  it("disables button when userValid or passwordConfirmed is false", () => {
     // Simulate invalid states and re-render component
     render(
       <MockedSignupContainer
@@ -101,7 +101,7 @@ describe("MockedSignupContainer", () => {
     expect(disabledBUutton).toBeDisabled();
   });
 
-  test("renders Alert component and handles close action", async () => {
+  it("renders Alert component and handles close action", async () => {
     const errorMessage = "User already exists";
     mockSignup.mockResolvedValueOnce({
       statusCode: 400,
